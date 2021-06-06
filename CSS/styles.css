@@ -1,0 +1,22 @@
+body {
+  color: #1d7cff;
+}
+
+.Pokemon__list {
+  color: black;
+  text-align: center;
+}
+
+header {
+  text-align: center;
+  font-family: 'Rock Salt', cursive;
+}
+
+.pokemon__logo {
+  position: relative;
+  text-align: center;
+  width: 140px;
+  height: 70px;
+  text-align: center;
+  margin: auto;
+}
