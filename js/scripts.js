@@ -10,6 +10,6 @@ for (let i = 0; i < pokemonList.length; i++) {
     /* The document.write statement then lists the Pokemon name and height whilst providing some spacing
     between text fields and the arrays being returned  */
   document.write (pokemonList[i].name + ' (height: ' +pokemonList[i].height +') (type: ' +pokemonList[i].types +') -The biggest Pokemon! ' + '<br>');
-  //The statement returns the information in the arrays for all the other pokemon, regardless of their height//
+  //The statement returns the values stored in the rest of the arrays for the other pokemon, regardless of their height//
 } else{document.write (pokemonList[i].name + ' (height: ' +pokemonList[i].height +') (type: ' +pokemonList[i].types +') ' + '<br>');}
 }
