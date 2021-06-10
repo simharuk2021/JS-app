@@ -3,13 +3,7 @@ let pokemonList = [
   {name:"Venusaur", height:6.07, types:["seed", "overgrown"]},
 {name:"Charmander", height:2.00, types:["fire"]}
 ];
-// This code searches for the Pokemon's within the Array and loops through them all.
-for (let i = 0; i < pokemonList.length; i++) {
-  //The if statement looks for the pokemon which has a height over 6.00
-  if (pokemonList[i].height>=6.00) {
-    /* The document.write statement then lists the Pokemon name and height whilst providing some spacing
-    between text fields and the arrays being returned  */
-  document.write (pokemonList[i].name + ' (height: ' +pokemonList[i].height +') (type: ' +pokemonList[i].types +') -The biggest Pokemon! ' + '<br>');
-  //The statement returns the values stored in the rest of the arrays for the other pokemon, regardless of their height//
-} else{document.write (pokemonList[i].name + ' (height: ' +pokemonList[i].height +') (type: ' +pokemonList[i].types +') ' + '<br>');}
-}
+/* This code creates a function which cycles through each pokemon within the array and then writes (and formats) the values within the array into the document*/
+pokemonList.forEach(function(pokemon) {
+  document.write(pokemon.name + ' is ' + pokemon.height + ' feet high and is '+ 'of type ' + pokemon.types + '<br>');
+});
