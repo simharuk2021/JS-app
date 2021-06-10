@@ -1,9 +1,25 @@
-let pokemonList = [
-  {name:"Bulbasaur", height:2.04, types:["grass", "poison"]},
+/*The below code creates a repository within a function which is already executed. Within the Repository is the array of Pokemon*/
+
+let pokemonRepository = (function () {
+  let pokemonList = [{name:"Bulbasaur", height:2.04, types:["grass", "poison"]},
   {name:"Venusaur", height:6.07, types:["seed", "overgrown"]},
-{name:"Charmander", height:2.00, types:["fire"]}
-];
-/* This code creates a function which cycles through each pokemon within the array and then writes (and formats) the values within the array into the document*/
-pokemonList.forEach(function(pokemon) {
-  document.write(pokemon.name + ' is ' + pokemon.height + ' feet high and is '+ 'of type ' + pokemon.types + '<br>');
-});
+{name:"Charmander", height:2.00, types:["fire"]}];
+
+/* The below code creates a function called add, which allows for the addition of a new pokemon using .push*/
+  function add(pokemon) {
+    pokemonList.push(pokemon);
+  }
+
+/*The below code creates a getAll function which returns pokemonList*/
+  function getAll() {
+    return pokemonList;
+  }
+
+/* the below code returns the add and getAll functions */
+  return {
+    add: add,
+    getAll: getAll
+  };
+})();
+pokemonRepository.add({name:'Metapod'});
+console.log(pokemonRepository.getAll());
