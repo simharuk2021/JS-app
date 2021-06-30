@@ -33,6 +33,7 @@ function addListItem (pokemon){
     showDetails(pokemon)
   });
 }
+/* this code creates a function which loads the list of items within each Pokemon within the URL */
 
 function showDetails(item) {
   pokemonRepository.loadDetails(item).then(function () {
@@ -50,14 +51,13 @@ function loadList() {
           detailsUrl: item.url
         };
         add(pokemon);
-        console.log(pokemon);
       });
     }).catch(function (e) {
       console.error(e);
     })
   }
 
-
+/* this code creates a function which loads the details for each item(pokemon) within the URL */
   function loadDetails(item) {
       let url = item.detailsUrl;
       return fetch(url).then(function (response) {
@@ -69,12 +69,6 @@ function loadList() {
         item.types = details.types;
       }).catch(function (e) {
         console.error(e);
-      });
-    }
-
-    function showDetails(pokemon) {
-      loadDetails(pokemon).then(function () {
-        console.log(pokemon);
       });
     }
 
@@ -90,7 +84,7 @@ function loadList() {
 })();
 //This code adds a new pokemon to the list with the details listed as below
 // console.log(pokemonRepository.getAll());
-pokemonRepository.add({name:'Lapras', height:"8.02", types:["Water Absorb", "Shell Armor"]});
+// pokemonRepository.add({name:'Lapras', height:"8.02", types:["Water Absorb", "Shell Armor"]});
 //This code cycles through the list of all pokemon held within the repository
 
 
