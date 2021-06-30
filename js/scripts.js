@@ -1,13 +1,17 @@
 //This code creates a repository for holding all of the pokemon
 let pokemonRepository = (function () {
-  let pokemonList = [{name:"Bulbasaur", height:2.04, types:["grass", "poison"]},
-  {name:"Venusaur", height:6.07, types:["seed", "overgrown"]},
-{name:"Charmander", height:2.00, types:["fire"]}];
+  let pokemonList = [];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
 /* The below code creates a function called add, which allows for the addition of a new pokemon using .push*/
   function add(pokemon) {
-    if (typeof pokemon === "object"){
-      pokemonList.push(pokemon);
+    if (
+      typeof pokemon === "object"
+       )
+      {pokemonList.push(pokemon);
+      }
+      else {
+        console.log("pokemon is not correct");
     }
   }
 
@@ -25,26 +29,75 @@ function addListItem (pokemon){
   button.classList.add("button-class");
   listpokemon.appendChild(button);
   pokemonList.appendChild(listpokemon);
-  button.addEventListener('click', function()
-  {showDetails(pokemon)
+  button.addEventListener('click', function(){
+    showDetails(pokemon)
   });
 }
 
-function showDetails(pokemon){
-console.log(pokemon);
+function showDetails(item) {
+  pokemonRepository.loadDetails(item).then(function () {
+    console.log(item);
+  });
 }
+
+function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+        console.log(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
+  }
+
+
+  function loadDetails(item) {
+      let url = item.detailsUrl;
+      return fetch(url).then(function (response) {
+        return response.json();
+      }).then(function (details) {
+        // Now we add the details to the item
+        item.imageUrl = details.sprites.front_default;
+        item.height = details.height;
+        item.types = details.types;
+      }).catch(function (e) {
+        console.error(e);
+      });
+    }
+
+    function showDetails(pokemon) {
+      loadDetails(pokemon).then(function () {
+        console.log(pokemon);
+      });
+    }
 
 /* the below code returns the add and getAll functions */
   return {
     add: add,
     getAll: getAll,
-    addListItem: addListItem
+    addListItem: addListItem,
+    loadList: loadList,
+    loadDetails: loadDetails,
+    showDetails:showDetails
   };
 })();
 //This code adds a new pokemon to the list with the details listed as below
-console.log(pokemonRepository.getAll());
+// console.log(pokemonRepository.getAll());
 pokemonRepository.add({name:'Lapras', height:"8.02", types:["Water Absorb", "Shell Armor"]});
 //This code cycles through the list of all pokemon held within the repository
-pokemonRepository.getAll().forEach(function (pokemon) {
-  pokemonRepository.addListItem(pokemon);
+
+
+
+pokemonRepository.loadList().then(function() {
+  // Now the data is loaded!
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
+  });
 });
